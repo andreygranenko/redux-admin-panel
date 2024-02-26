@@ -13,6 +13,7 @@ import Spinner from '../spinner/Spinner';
 
 const HeroesList = () => {
     const {heroes, heroesLoadingStatus} = useSelector(state => state);
+    const activeFilter = useSelector(state => state.activeFilter);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
@@ -37,7 +38,11 @@ const HeroesList = () => {
         }
 
         return arr.map(({id, ...props}) => {
-            return <HeroesListItem id={id} key={id} {...props}/>
+            if (activeFilter !== "all" && activeFilter !== props.element) {
+                return null;
+            } else {
+                return <HeroesListItem id={id} key={id} {...props}/>
+            }
         })
     }
 

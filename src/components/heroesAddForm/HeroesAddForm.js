@@ -1,9 +1,10 @@
 import {v1 as uuid} from 'uuid';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
-import {useDispatch} from "react-redux";
-import {heroAdd} from "../../actions";
+import {useDispatch, useSelector} from "react-redux";
+import {filtersFetched, heroAdd} from "../../actions";
 import {useHttp} from "../../hooks/http.hook";
+import {useEffect} from "react";
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -18,6 +19,16 @@ import {useHttp} from "../../hooks/http.hook";
 const HeroesAddForm = () => {
     const dispatch = useDispatch();
     const {request} = useHttp();
+    const filters = useSelector(state => state.filters);
+    const filtersLoadingStatus = useSelector(state => state.filtersLoadingStatus);
+
+    useEffect(() => {
+      request('http://localhost:3001/filters', 'GET')
+        .then(data => {
+          dispatch(filtersFetched(data))
+        })
+        .catch(e => console.log(e));
+    }, []);
     const addHero = (values) => {
       const id = uuid();
       request('http://localhost:3001/heroes', 'POST',
@@ -42,6 +53,23 @@ const HeroesAddForm = () => {
         .catch(e => console.log(e));
 
     }
+
+    const renderFilters = (filters, status) => {
+      if (status === 'loading') {
+        return <option>loading...</option>
+      } else {
+        return [
+          <option key={'default'}>Я владею элементом...</option>,
+          ...filters.map(filter => {
+            if (filter.name === 'Все') return;
+            return <option key={filter.value} value={filter.value}>{filter.name}</option>
+          })
+        ]
+
+      }
+    }
+
+
     return (
         <Formik
           initialValues={
@@ -95,11 +123,7 @@ const HeroesAddForm = () => {
                   className="form-select"
                   id="element"
                   name="element">
-                  <option >Я владею элементом...</option>
-                  <option value="fire">Огонь</option>
-                  <option value="water">Вода</option>
-                  <option value="wind">Ветер</option>
-                  <option value="earth">Земля</option>
+                  {renderFilters(filters, filtersLoadingStatus)}
                 </Field>
               </label>
               <ErrorMessage className={'error'} name={'element'} component={'div'}/>
