@@ -19,8 +19,8 @@ import {useEffect} from "react";
 const HeroesAddForm = () => {
     const dispatch = useDispatch();
     const {request} = useHttp();
-    const filters = useSelector(state => state.filters);
-    const filtersLoadingStatus = useSelector(state => state.filtersLoadingStatus);
+    const filters = useSelector(state => state.filters.filters);
+    const filtersLoadingStatus = useSelector(state => state.filters.filtersLoadingStatus);
 
     useEffect(() => {
       request('http://localhost:3001/filters', 'GET')

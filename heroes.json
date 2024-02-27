@@ -13,16 +13,22 @@
       "element": "wind"
     },
     {
-      "id": "7c49ff00-d4d9-11ee-8987-83c48fc9684f",
-      "name": "asdsf",
-      "description": "sdfsdfsdfsdfsdfsd",
-      "element": "water"
-    },
-    {
       "id": "70d03f10-d4e1-11ee-866e-3751ffa2b8ea",
       "name": "Chill",
       "description": "sdfsdfsdfsd",
       "element": "water"
+    },
+    {
+      "id": "19ae7530-d5b3-11ee-aa12-059269c9c96e",
+      "name": "Alex smalch",
+      "description": "I can really really bad",
+      "element": "earth"
+    },
+    {
+      "id": "5eb52230-d5b5-11ee-86f5-59ac177f97dc",
+      "name": "Bro",
+      "description": "heyeyertefd",
+      "element": "fire"
     }
   ],
   "filters": [

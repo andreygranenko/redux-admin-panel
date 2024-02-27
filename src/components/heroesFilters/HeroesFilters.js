@@ -10,9 +10,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {changeFilter} from "../../actions";
 
 const HeroesFilters = () => {
-    const activeFilter = useSelector(state => state.activeFilter);
+    const activeFilter = useSelector(state => state.filters.activeFilter);
     const dispatch = useDispatch();
-    const filters = useSelector(state => state.filters);
+    const filters = useSelector(state => state.filters.filters);
     if (filters.length === 0) {
         return <h5 className="text-center mt-5">Фильтров пока нет</h5>
     }

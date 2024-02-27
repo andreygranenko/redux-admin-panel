@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { heroesFetching, heroesFetched, heroesFetchingError } from '../../actions';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
+import {createSelector} from "reselect";
 
 // Задача для этого компонента:
 // При клике на "крестик" идет удаление персонажа из общего состояния
@@ -12,8 +13,29 @@ import Spinner from '../spinner/Spinner';
 // Удаление идет и с json файла при помощи метода DELETE
 
 const HeroesList = () => {
-    const {heroes, heroesLoadingStatus} = useSelector(state => state);
-    const activeFilter = useSelector(state => state.activeFilter);
+
+    const filteredHeroesSelector = createSelector(
+      (state) => state.filters.activeFilter,
+      (state) => state.heroes.heroes,
+      (activeFilter, heroes) => {
+        if (activeFilter === "all") {
+          console.log('test');
+          return heroes;
+        } else {
+          return heroes.filter(hero => hero.element === activeFilter);
+        }
+      }
+    );
+
+    const filteredHeroes = useSelector(filteredHeroesSelector);
+    // const filteredHeroes = useSelector(state => {
+    //     if (state.filters.activeFilter === "all") {
+    //         return state.heroes.heroes;
+    //     } else {
+    //         return state.heroes.heroes.filter(hero => hero.element === state.filters.activeFilter);
+    //     }
+    // });
+    const {heroesLoadingStatus} = useSelector(state => state.heroes);
     const dispatch = useDispatch();
     const {request} = useHttp();
 
@@ -38,15 +60,11 @@ const HeroesList = () => {
         }
 
         return arr.map(({id, ...props}) => {
-            if (activeFilter !== "all" && activeFilter !== props.element) {
-                return null;
-            } else {
-                return <HeroesListItem id={id} key={id} {...props}/>
-            }
+            return <HeroesListItem id={id} key={id} {...props}/>
         })
     }
 
-    const elements = renderHeroesList(heroes);
+    const elements = renderHeroesList(filteredHeroes);
     return (
         <ul>
             {elements}
