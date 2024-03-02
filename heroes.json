@@ -13,16 +13,16 @@
       "element": "wind"
     },
     {
-      "id": "70d03f10-d4e1-11ee-866e-3751ffa2b8ea",
-      "name": "Chill",
-      "description": "sdfsdfsdfsd",
-      "element": "water"
-    },
-    {
       "id": "19ae7530-d5b3-11ee-aa12-059269c9c96e",
       "name": "Alex smalch",
       "description": "I can really really bad",
       "element": "earth"
+    },
+    {
+      "id": "f50df180-d8c6-11ee-a9ae-61824e62db95",
+      "name": "Blue",
+      "description": "i am just blue dabu di dabu da",
+      "element": "water"
     }
   ],
   "filters": [
