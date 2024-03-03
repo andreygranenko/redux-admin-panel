@@ -2,7 +2,8 @@ import {v1 as uuid} from 'uuid';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchFilters,  heroAdd} from "../../actions";
+import {fetchFilters} from "../../actions";
+import {heroAdd} from '../heroesList/heroesSlice';
 import {useHttp} from "../../hooks/http.hook";
 import {useEffect} from "react";
 

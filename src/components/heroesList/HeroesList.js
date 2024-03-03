@@ -19,7 +19,6 @@ const HeroesList = () => {
       (state) => state.heroes.heroes,
       (activeFilter, heroes) => {
         if (activeFilter === "all") {
-          console.log('test');
           return heroes;
         } else {
           return heroes.filter(hero => hero.element === activeFilter);

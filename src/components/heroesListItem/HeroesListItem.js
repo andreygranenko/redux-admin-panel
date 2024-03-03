@@ -1,4 +1,4 @@
-import {heroDelete} from "../../actions";
+import {heroDelete} from "../heroesList/heroesSlice";
 import {useDispatch} from "react-redux";
 import {useHttp} from "../../hooks/http.hook";
 

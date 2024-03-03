@@ -1,5 +1,5 @@
-import {createAction} from "@reduxjs/toolkit";
-
+import {filtersFetched} from "../components/heroesFilters/filtersSlice";
+import {heroesFetching, heroesFetched, heroesFetchingError} from "../components/heroesList/heroesSlice";
 export const fetchHeroes = (request) => (dispatch) => {
     dispatch(heroesFetching());
     request("http://localhost:3001/heroes")
@@ -19,15 +19,15 @@ export const fetchFilters = (request) => (dispatch) => {
 //     }
 // }
 
-export const heroesFetching = createAction('HEROES_FETCHING');
-
-export const heroesFetched = createAction('HEROES_FETCHED');
-
-export const heroesFetchingError = createAction('HEROES_FETCHING_ERROR');
-
-export const heroDelete = createAction('HERO_DELETE');
-
-export const heroAdd = createAction('HERO_ADD');
+// export const heroesFetching = createAction('HEROES_FETCHING');
+//
+// export const heroesFetched = createAction('HEROES_FETCHED');
+//
+// export const heroesFetchingError = createAction('HEROES_FETCHING_ERROR');
+//
+// export const heroDelete = createAction('HERO_DELETE');
+//
+// export const heroAdd = createAction('HERO_ADD');
 
 // export const heroesFetched = (heroes) => {
 //     return {
@@ -56,19 +56,19 @@ export const heroAdd = createAction('HERO_ADD');
 //     }
 // }
 
-export const filtersFetched = (filters) => {
-    return {
-        type: 'FILTERS_FETCHED',
-        payload: filters
-    }
-}
-
-export const changeFilter = (filter) => {
-    return {
-        type: 'CHANGE_FILTER',
-        payload: filter
-    };
-}
+// export const filtersFetched = (filters) => {
+//     return {
+//         type: 'FILTERS_FETCHED',
+//         payload: filters
+//     }
+// }
+//
+// export const changeFilter = (filter) => {
+//     return {
+//         type: 'CHANGE_FILTER',
+//         payload: filter
+//     };
+// }
 
 // export const changeFilter = (filter) => (dispatch) => {
 //     setTimeout(() => {
