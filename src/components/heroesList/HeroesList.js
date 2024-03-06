@@ -1,11 +1,9 @@
-import {useHttp} from '../../hooks/http.hook';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {fetchHeroes} from './heroesSlice';
+import {fetchHeroes, filteredHeroesSelector} from './heroesSlice';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
-import {createSelector} from "reselect";
 
 // Задача для этого компонента:
 // При клике на "крестик" идет удаление персонажа из общего состояния
@@ -14,17 +12,7 @@ import {createSelector} from "reselect";
 
 const HeroesList = () => {
 
-    const filteredHeroesSelector = createSelector(
-      (state) => state.filters.activeFilter,
-      (state) => state.heroes.heroes,
-      (activeFilter, heroes) => {
-        if (activeFilter === "all") {
-          return heroes;
-        } else {
-          return heroes.filter(hero => hero.element === activeFilter);
-        }
-      }
-    );
+
 
     const filteredHeroes = useSelector(filteredHeroesSelector);
     // const filteredHeroes = useSelector(state => {
