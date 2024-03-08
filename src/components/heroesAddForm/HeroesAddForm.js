@@ -2,7 +2,7 @@ import {v1 as uuid} from 'uuid';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from "react-redux";
-import {fetchFilters} from "../heroesFilters/filtersSlice";
+import {fetchFilters, selectAll} from "../heroesFilters/filtersSlice";
 import {heroAdd} from '../heroesList/heroesSlice';
 import {useHttp} from "../../hooks/http.hook";
 import {useEffect} from "react";
@@ -20,7 +20,7 @@ import {useEffect} from "react";
 const HeroesAddForm = () => {
     const dispatch = useDispatch();
     const {request} = useHttp();
-    const filters = useSelector(state => state.filters.filters);
+    const filters = useSelector(selectAll);
     const filtersLoadingStatus = useSelector(state => state.filters.filtersLoadingStatus);
 
     useEffect(() => {

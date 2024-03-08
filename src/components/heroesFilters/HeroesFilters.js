@@ -7,12 +7,13 @@
 // Представьте, что вы попросили бэкенд-разработчика об этом
 
 import {useDispatch, useSelector} from "react-redux";
-import {changeFilter} from "./filtersSlice";
+import {changeFilter, selectAll} from "./filtersSlice";
 
 const HeroesFilters = () => {
     const activeFilter = useSelector(state => state.filters.activeFilter);
     const dispatch = useDispatch();
-    const filters = useSelector(state => state.filters.filters);
+    const filters = useSelector(selectAll);
+    console.log(filters);
     if (filters.length === 0) {
         return <h5 className="text-center mt-5">Фильтров пока нет</h5>
     }

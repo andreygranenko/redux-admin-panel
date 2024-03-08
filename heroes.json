@@ -7,12 +7,6 @@
       "element": "fire"
     },
     {
-      "id": 2,
-      "name": "Неизвестный герой",
-      "description": "Скрывающийся в тени",
-      "element": "wind"
-    },
-    {
       "id": "19ae7530-d5b3-11ee-aa12-059269c9c96e",
       "name": "Alex smalch",
       "description": "I can really really bad",
@@ -23,6 +17,18 @@
       "name": "Blue",
       "description": "i am just blue dabu di dabu da",
       "element": "water"
+    },
+    {
+      "id": "2decf3a0-dbf8-11ee-bd62-fbf39246aa12",
+      "name": "sdfsdf",
+      "description": "sdfsdfsdfsdfsdf",
+      "element": "earth"
+    },
+    {
+      "id": "31f95420-dbf8-11ee-bd62-fbf39246aa12",
+      "name": "sdfsdf",
+      "description": "sdfsdfsdfsdfsdf",
+      "element": "wind"
     }
   ],
   "filters": [
