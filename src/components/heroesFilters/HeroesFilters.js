@@ -13,7 +13,6 @@ const HeroesFilters = () => {
     const activeFilter = useSelector(state => state.filters.activeFilter);
     const dispatch = useDispatch();
     const filters = useSelector(selectAll);
-    console.log(filters);
     if (filters.length === 0) {
         return <h5 className="text-center mt-5">Фильтров пока нет</h5>
     }
@@ -27,7 +26,6 @@ const HeroesFilters = () => {
             </button>
         })
     }
-
     return (
         <div className="card shadow-lg mt-4">
             <div className="card-body">
