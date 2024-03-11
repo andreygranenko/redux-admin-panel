@@ -3,9 +3,8 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 import {useDispatch, useSelector} from "react-redux";
 import {fetchFilters, selectAll} from "../heroesFilters/filtersSlice";
-import {heroAdd} from '../heroesList/heroesSlice';
-import {useHttp} from "../../hooks/http.hook";
 import {useEffect} from "react";
+import {useCreateHeroMutation} from "../../api/apiSlice";
 
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -19,35 +18,24 @@ import {useEffect} from "react";
 
 const HeroesAddForm = () => {
     const dispatch = useDispatch();
-    const {request} = useHttp();
     const filters = useSelector(selectAll);
     const filtersLoadingStatus = useSelector(state => state.filters.filtersLoadingStatus);
+
+    const [createHero] = useCreateHeroMutation();
 
     useEffect(() => {
       dispatch(fetchFilters());
     }, []);
     const addHero = (values) => {
       const id = uuid();
-      request('http://localhost:3001/heroes', 'POST',
-        JSON.stringify({
-          id: id,
-          name: values.name,
-          description: values.text,
-          element: values.element
-        }),
-        {
-          'Content-Type': 'application/json'
-        }
-      )
-        .then(() => {
-          dispatch(heroAdd({
-            id: id,
-            name: values.name,
-            description: values.text,
-            element: values.element
-          }))
-        })
-        .catch(e => console.log(e));
+      const newHero = {
+        id: id,
+        name: values.name,
+        description: values.text,
+        element: values.element
+      }
+
+      createHero(newHero).unwrap();
 
     }
 

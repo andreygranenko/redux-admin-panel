@@ -1,9 +1,8 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import {fetchHeroes, filteredHeroesSelector} from './heroesSlice';
+import {useMemo} from 'react';
+import {useSelector } from 'react-redux';
 import HeroesListItem from "../heroesListItem/HeroesListItem";
 import Spinner from '../spinner/Spinner';
+import {useGetHeroesQuery} from "../../api/apiSlice";
 
 // Задача для этого компонента:
 // При клике на "крестик" идет удаление персонажа из общего состояния
@@ -12,27 +11,29 @@ import Spinner from '../spinner/Spinner';
 
 const HeroesList = () => {
 
+    const {
+        data: heroes = [],
+        isLoading,
+        isError,
+    } = useGetHeroesQuery();
+
+    const activeFilter = useSelector(state => state.filters.activeFilter);
+    const filteredHeroes = useMemo(() => {
+        const filteredHeroes = heroes.slice();
+        if (activeFilter === "all") {
+            return filteredHeroes;
+        } else {
+            return filteredHeroes.filter(hero => hero.element === activeFilter);
+        }
+    }, [heroes, activeFilter]);
 
 
-    const filteredHeroes = useSelector(filteredHeroesSelector);
-    // const filteredHeroes = useSelector(state => {
-    //     if (state.filters.activeFilter === "all") {
-    //         return state.heroes.heroes;
-    //     } else {
-    //         return state.heroes.heroes.filter(hero => hero.element === state.filters.activeFilter);
-    //     }
-    // });
-    const {heroesLoadingStatus} = useSelector(state => state.heroes);
-    const dispatch = useDispatch();
 
-    useEffect(() => {
-         dispatch(fetchHeroes());
-        // eslint-disable-next-line
-    }, []);
 
-    if (heroesLoadingStatus === "loading") {
+
+    if (isLoading) {
         return <Spinner/>;
-    } else if (heroesLoadingStatus === "error") {
+    } else if (isError) {
         return <h5 className="text-center mt-5">Ошибка загрузки</h5>
     }
 

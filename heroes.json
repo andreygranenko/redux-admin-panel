@@ -17,18 +17,6 @@
       "name": "Blue",
       "description": "i am just blue dabu di dabu da",
       "element": "water"
-    },
-    {
-      "id": "2decf3a0-dbf8-11ee-bd62-fbf39246aa12",
-      "name": "sdfsdf",
-      "description": "sdfsdfsdfsdfsdf",
-      "element": "earth"
-    },
-    {
-      "id": "31f95420-dbf8-11ee-bd62-fbf39246aa12",
-      "name": "sdfsdf",
-      "description": "sdfsdfsdfsdfsdf",
-      "element": "wind"
     }
   ],
   "filters": [

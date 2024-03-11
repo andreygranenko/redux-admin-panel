@@ -1,11 +1,10 @@
-import {heroDelete} from "../heroesList/heroesSlice";
-import {useDispatch} from "react-redux";
-import {useHttp} from "../../hooks/http.hook";
+import {useDeleteHeroMutation} from "../../api/apiSlice";
+import {useCallback} from "react";
 
 const HeroesListItem = ({name, description, element, id}) => {
-    const dispatch = useDispatch();
-    const {request} = useHttp();
     let elementClassName;
+
+    const [deleteHero] = useDeleteHeroMutation();
 
     switch (element) {
         case 'fire':
@@ -24,13 +23,11 @@ const HeroesListItem = ({name, description, element, id}) => {
             elementClassName = 'bg-warning bg-gradient';
     }
 
-    const deleteHero = (id) => {
-        request(`http://localhost:3001/heroes/${id}`, 'DELETE')
-          .then(() => {
-              dispatch(heroDelete(id));
-          })
-          .catch(e => console.log(e));
-    }
+
+
+    const onDelete = useCallback((id) => {
+      deleteHero(id);
+    }, []);
 
     return (
         <li 
@@ -45,7 +42,7 @@ const HeroesListItem = ({name, description, element, id}) => {
                 <p className="card-text">{description}</p>
             </div>
             <span className="position-absolute top-0 start-100 translate-middle badge border rounded-pill bg-light">
-                <button onClick={() => deleteHero(id)} type="button" className="btn-close btn-close" aria-label="Close"></button>
+                <button onClick={() => onDelete(id)} type="button" className="btn-close btn-close" aria-label="Close"></button>
             </span>
         </li>
     )
